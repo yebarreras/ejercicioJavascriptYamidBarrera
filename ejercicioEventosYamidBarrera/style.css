@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+#imc {
+    display: flex;
+}
+
+#datos {
+    width: 30vw;
+    height: 70vh;
+    background-color: #DBDFFD;
+    align-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+}
+
+#resultado {
+    width: 70vw;
+    height: 10vh;
+    background-color: #DBDFFD;
+    align-self: center;
+    align-content: center;
+}

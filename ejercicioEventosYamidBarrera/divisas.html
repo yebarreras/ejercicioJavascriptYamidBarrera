@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Conversor de Divisas</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Conversor de divisas</h1>
-    
+    <div class="contenedor">
+        <h1>Conversor de Divisas</h1>
+        <div>
+            <label for="monedaOrigen">Moneda de origen:</label>
+            <select id="monedaOrigen">
+                <option value="USD" selected>Dólares (USD)</option>
+                <option value="ARS">Peso argentino (ARS)</option>
+                <option value="EUR">Euros (EUR)</option>
+                <option value="GBP">Libras (GBP)</option>
+                <option value="COP">Colombianos (COP)</option>
+                <option value="MXN">Pesos mexicanos (MXN)</option>
+                <option value="BRL">Reales brasileiros (BRL)</option>
+            </select>
+            <input type="number" id="cantidadOrigen" placeholder="Cantidad" min="0" value="1">
+        </div>
+        <div>
+            <label for="monedaDestino">Moneda de destino:</label>
+            <select id="monedaDestino">
+                <option value="USD">Dólares (USD)</option>
+                <option value="ARS">Pesos (ARS)</option>
+                <option value="EUR" selected>Euros (EUR)</option>
+                <option value="GBP">Libras (GBP)</option>
+                <option value="COP">Colombianos (COP)</option>
+                <option value="MXN">Pesos mexicanos (MXN)</option>
+                <option value="BRL">Reales brasileiros (BRL)</option>
+            </select>
+            <input type="number" id="cantidadDestino" placeholder="Cantidad" min="0">
+        </div>
+    </div>
     <script src="eventos.js"></script>
 </body>
+
 </html>

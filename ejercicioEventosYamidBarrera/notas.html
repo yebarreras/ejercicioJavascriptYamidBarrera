@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas diarias</title>
+    <link rel="stylesheet" href="stylenotas.css">
+</head>
+
+<body>
+    <h1>Mis notas diarias</h1>
+    <div id="nuevaNota">
+        <div id="inputs">
+            <h2>Nueva nota</h2>
+            <input type="text" id="titulo" value="" placeholder="Título" style="width: 100%;">
+            <textarea id="texto"  placeholder="Ingrese su nota aqui!" rows="4" cols="25"></textarea>
+        </div>
+        <div id="botones">
+            <button type="button" id="guardar" onclick="agregarNota()">Guardar</button>
+            <button type="button" id="borrar">Borrar</button>
+        </div>
+    </div>
+    <div id="contenedor">
+    </div>
+    <script src="eventos.js"></script>
+</body>
+
+</html>

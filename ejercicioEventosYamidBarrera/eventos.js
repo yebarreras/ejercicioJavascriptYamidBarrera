@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     const formulario = document.forms[0]
 
     formulario.addEventListener("submit", (e) => {
@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("Resultado").value = imc
     })
 })
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
     let selectMonedaOrigen = document.getElementById("monedaOrigen");
@@ -88,19 +86,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-        function convertirOrigenADestino() {
-            let monedaOrigen = selectMonedaOrigen.value;
-    let monedaDestino = selectMonedaDestino.value;
-    let cantidadOrigen = parseFloat(inputCantidadOrigen.value);
+    function convertirOrigenADestino() {
+        let monedaOrigen = selectMonedaOrigen.value;
+        let monedaDestino = selectMonedaDestino.value;
+        let cantidadOrigen = parseFloat(inputCantidadOrigen.value);
 
-    if (!isNaN(cantidadOrigen) && tasasDeCambio[monedaOrigen] && tasasDeCambio[monedaOrigen][monedaDestino]) {
-        let tasa = tasasDeCambio[monedaOrigen][monedaDestino];
-        let cantidadDestino = cantidadOrigen * tasa;
-        inputCantidadDestino.value = cantidadDestino.toFixed(2);
-    } else {
-        inputCantidadDestino.value = "";
+        if (!isNaN(cantidadOrigen) && tasasDeCambio[monedaOrigen] && tasasDeCambio[monedaOrigen][monedaDestino]) {
+            let tasa = tasasDeCambio[monedaOrigen][monedaDestino];
+            let cantidadDestino = cantidadOrigen * tasa;
+            inputCantidadDestino.value = cantidadDestino.toFixed(2);
+        } else {
+            inputCantidadDestino.value = "";
+        }
     }
-}
 
     function convertirDestinoAOrigen() {
         let monedaOrigen = selectMonedaOrigen.value;
@@ -118,8 +116,87 @@ document.addEventListener("DOMContentLoaded", function () {
 
     convertirOrigenADestino();
 
-inputCantidadOrigen.addEventListener("input", convertirOrigenADestino);
-inputCantidadDestino.addEventListener("input", convertirDestinoAOrigen);
-selectMonedaOrigen.addEventListener("change", convertirOrigenADestino);
-selectMonedaDestino.addEventListener("change", convertirOrigenADestino);
-});
+    inputCantidadOrigen.addEventListener("input", convertirOrigenADestino);
+    inputCantidadDestino.addEventListener("input", convertirDestinoAOrigen);
+    selectMonedaOrigen.addEventListener("change", convertirOrigenADestino);
+    selectMonedaDestino.addEventListener("change", convertirOrigenADestino);
+});*/
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    let notas = [
+        {
+            id: 1,
+            titulo: "Nota 1",
+            texto: "Texto de la nota 1",
+            realizada: true
+        },
+        {
+            id: 2,
+            titulo: "Nota 2",
+            texto: "Texto de la nota 2",
+            realizada: false
+        },
+        {
+            id: 3,
+            titulo: "Nota 3",
+            texto: "Texto de la nota 3",
+            realizada: false
+        },
+        {
+            id: 4,
+            titulo: "Nota 4",
+            texto: "Texto de la nota 4",
+            realizada: false
+        },
+        {
+            id: 5,
+            titulo: "Nota 5",
+            texto: "Texto de la nota 5",
+            realizada: false
+        }
+    ];
+
+    let idGlobal = notas.length;
+
+    function pintarTarjetas(notas) {
+        for (let i = 0; i < notas.length; i++) {
+            let contenedor = document.getElementById("contenedor");
+            let tarjeta = document.createElement("div");
+            contenedor.appendChild(tarjeta);
+            tarjeta.classList.add("card");
+            let titulo = document.createElement("h2");
+            tarjeta.appendChild(titulo);
+            titulo.innerText = notas[i].titulo;
+            let texto = document.createElement("p");
+            tarjeta.appendChild(texto);
+            texto.classList.add("h2");
+            texto.innerText = notas[i].texto;
+        }
+        return contenedor
+    }
+    pintarTarjetas(notas);
+
+    function nuevaNota() {
+        let inputTitulo = document.getElementById("titulo").value;
+        let inputTexto = document.querySelector("textarea").value;
+        if (inputTitulo == "" || inputTexto == "") {
+            alert("Por favor, rellene todos los campos");
+            return;
+        }
+        let limpiar = document.getElementById("contenedor");
+        limpiar.innerHTML = "";
+        let nota = {
+            id: idGlobal + 1,
+            titulo: inputTitulo,
+            texto: inputTexto,
+            realizada: false
+        }
+        return notas.push(nota);
+    }
+    function agregarNota() {
+        nuevaNota();
+        pintarTarjetas(notas);
+    }
+    document.getElementById('guardar').addEventListener('click', agregarNota);
+})

@@ -1,13 +1,24 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 h1 {
     text-align: center;
-    background-color: blueviolet;
-    height: 6vh;
+    background-color: #AD56CD;
+    min-height: 6vh;
+    size: 1rem;
+    margin-top: 10rem;
+}
+
+#encabezado {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+#encabezado2 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.textos {
+    text-align: center;
+    font-size: 1rem;
 }
 
 #nuevaNota {
@@ -25,31 +36,49 @@ h1 {
     align-items: flex-start;
     gap: 1rem;
     margin-bottom: 1rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 #botones {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 15%;
+}
+
+#guardar, #borrar {
+    width: 40%;
+    border: solid 1px black;
+    border-radius: 5px;
+}
+
+#filtros {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
 }
-button{
-    width: 100%;
+
+button {
+    width: 40%;
 }
+
 #contenedor {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    background-color: aqua;
-    min-height: 80vh;
+    background-color: #409D9B;
+    min-height: 70vh;
     z-index: 0;
 }
 
-.card {
+.carta {
     height: 300px;
     width: 200px;
     border: 1px solid black;
@@ -61,4 +90,11 @@ button{
     margin: 10px;
     z-index: 1;
     background-color: white;
+}
+
+#buscador {
+    width: 120%;
+    border: solid 1px black;
+    border-radius: 5px;
+    margin-top: 2rem;
 }

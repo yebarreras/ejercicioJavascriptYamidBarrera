@@ -129,13 +129,13 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 1,
             titulo: "Nota 1",
             texto: "Texto de la nota 1",
-            realizada: true
+            realizada: false
         },
         {
             id: 2,
             titulo: "Nota 2",
             texto: "Texto de la nota 2",
-            realizada: false
+            realizada: true
         },
         {
             id: 3,
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 4,
             titulo: "Nota 4",
             texto: "Texto de la nota 4",
-            realizada: false
+            realizada: true
         },
         {
             id: 5,
@@ -159,44 +159,108 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let idGlobal = notas.length;
 
-    function pintarTarjetas(notas) {
+    function pintarTarjetas() {
+        if (notas.length === 0) {
+            let contenedorVacio = document.getElementById("contenedor");
+            contenedorVacio.innerHTML = "<p>NO HAY NOTAS PARA MOSTRAR</p>";
+            return
+        }
         for (let i = 0; i < notas.length; i++) {
             let contenedor = document.getElementById("contenedor");
             let tarjeta = document.createElement("div");
             contenedor.appendChild(tarjeta);
-            tarjeta.classList.add("card");
+            tarjeta.classList.add("carta");
             let titulo = document.createElement("h2");
             tarjeta.appendChild(titulo);
+            titulo.classList.add("textos");
             titulo.innerText = notas[i].titulo;
             let texto = document.createElement("p");
             tarjeta.appendChild(texto);
-            texto.classList.add("h2");
+            texto.classList.add("textos");
             texto.innerText = notas[i].texto;
+            let id = document.createElement("p");
+            tarjeta.appendChild(id);
+            id.classList.add("textos");
+            id.innerText = "id: " + notas[i].id;
+            let checkbox = document.createElement("input");
+            tarjeta.appendChild(checkbox);
+            checkbox.type = "checkbox";
+            checkbox.checked = notas[i].realizada;
+            checkbox.addEventListener("click", () => marcarRealizada(notas[i].id));
+            let borrarNota = document.createElement("button");
+            tarjeta.appendChild(borrarNota);
+            borrarNota.classList.add("btn", "btn-outline-danger", "btn-sm");
+            borrarNota.innerText = "Eliminar";
+            borrarNota.addEventListener("click", () => borrando(notas[i].id));
         }
-        return contenedor
+
+        function borrando(id) {
+            console.log('Borrando nota con id:', id);
+            let indice = notas.findIndex((objeto) => objeto.id === id);
+            notas.splice(indice, 1);
+            notas.forEach((objeto, indice) => {
+                objeto.id = indice + 1
+            })
+            let limpiarContenedor = document.getElementById("contenedor");
+            limpiarContenedor.innerHTML = "";
+            pintarTarjetas();
+        }
+
+        function marcarRealizada(id) {
+            let indice = notas.findIndex((objeto) => objeto.id === id);
+            notas[indice].realizada = !notas[indice].realizada;
+            let limpiarContenedor = document.getElementById("contenedor");
+            limpiarContenedor.innerHTML = "";
+            pintarTarjetas();
+            console.log(notas);
+            return
+        }
     }
-    pintarTarjetas(notas);
+
+    pintarTarjetas();
 
     function nuevaNota() {
         let inputTitulo = document.getElementById("titulo").value;
         let inputTexto = document.querySelector("textarea").value;
         if (inputTitulo == "" || inputTexto == "") {
             alert("Por favor, rellene todos los campos");
+            return false;
+        }
+        function agregarNota() {
+            document.getElementById("titulo").value = "";
+            document.querySelector("textarea").value = "";
+            let nota = {
+                id: idGlobal + 1,
+                titulo: inputTitulo,
+                texto: inputTexto,
+                realizada: false
+            }
+            let limpiarContenedor = document.getElementById("contenedor");
+            limpiarContenedor.innerHTML = "";
+            notas.push(nota);
+            notas.forEach((objeto, indice) => {
+                objeto.id = indice + 1
+            })
+            pintarTarjetas();
             return;
         }
-        let limpiar = document.getElementById("contenedor");
-        limpiar.innerHTML = "";
-        let nota = {
-            id: idGlobal + 1,
-            titulo: inputTitulo,
-            texto: inputTexto,
-            realizada: false
-        }
-        return notas.push(nota);
+        agregarNota();
     }
-    function agregarNota() {
-        nuevaNota();
-        pintarTarjetas(notas);
+    document.getElementById('guardar').addEventListener('click', nuevaNota);
+
+    document.getElementById("switch").addEventListener("click", () => {
+        filtroRealizadas(notas);
+        console.log();
+    })
+
+    function filtroRealizadas(notas) {
+        let notasFiltradas = notas.filter((elemento) => elemento.realizada === true);
+        let limpiarContenedor = document.getElementById("contenedor");
+        limpiarContenedor.innerHTML = "";
+        notas.forEach((objeto, indice) => {
+            objeto.id = indice + 1
+        })
+        pintarTarjetas(notasFiltradas);
     }
-    document.getElementById('guardar').addEventListener('click', agregarNota);
+
 })
